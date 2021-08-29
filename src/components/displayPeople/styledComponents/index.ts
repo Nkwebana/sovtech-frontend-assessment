@@ -1,0 +1,14 @@
+import styled from 'styled-components';
+
+const StyledPeople = styled.div`
+  padding: 10px;
+`;
+
+const StyledPerson = styled.div`
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: lightsteelblue;
+  color: white;
+`;
+
+export { StyledPerson, StyledPeople };
