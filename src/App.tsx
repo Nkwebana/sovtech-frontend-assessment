@@ -5,7 +5,7 @@ import { useStoreActions, Actions } from 'easy-peasy';
 
 import { getPeoplePerPage } from '../src/queries';
 import { Head } from './components';
-import { Home } from './pages';
+import { Home, PersonDetails } from './pages';
 import { StoreModel, PeopleDetails } from '../src/store';
 
 const App: React.FC = () => {
@@ -25,6 +25,7 @@ const App: React.FC = () => {
       <Head />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/details" component={PersonDetails} />
       </Switch>
     </>
   );
