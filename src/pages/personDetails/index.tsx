@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import { StyledPersonDetails, StyledPersonInfo } from './styledComponents';
 import { DisplayPersonHomeWorld } from '../../components';
+import { convertObjectIntoArray } from '../../utils/helpers';
 
 const PersonDetails: React.FC = () => {
   const location = useLocation();
@@ -10,11 +11,7 @@ const PersonDetails: React.FC = () => {
   const { name, height, mass, homeworld } = selectedPerson;
 
   //Converting an object into an array
-  const personHomeWorld = Object.keys(homeworld).reduce((newArray, key) => {
-    const subObject: any = { name: [key][0], value: homeworld[key] };
-
-    return newArray.concat(subObject);
-  }, []);
+  const personHomeWorld = convertObjectIntoArray(homeworld);
 
   return (
     <StyledPersonDetails>
@@ -26,6 +23,7 @@ const PersonDetails: React.FC = () => {
         <li>
           Height: <strong>{height}</strong>
         </li>
+
         <li>
           Mass: <strong>{mass}</strong>
         </li>

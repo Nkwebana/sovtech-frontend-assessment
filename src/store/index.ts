@@ -23,7 +23,9 @@ export interface PeopleDetails {
 
 export interface StoreModel<PeopleDetails> {
   peopleDetails: Generic<PeopleDetails>;
+  count: number;
   add: Action<StoreModel<PeopleDetails>, PeopleDetails>;
+  addCount: Action<StoreModel<number>, number>;
 }
 
 export interface PeopleStore {
@@ -32,8 +34,12 @@ export interface PeopleStore {
 
 const storeValue: StoreModel<PeopleDetails> = {
   peopleDetails: generic([]),
+  count: 1,
   add: action((state, newPeople) => {
     state.peopleDetails = newPeople;
+  }),
+  addCount: action((state, newCount) => {
+    state.count = newCount;
   }),
 };
 

@@ -20,9 +20,9 @@ const DisplayPersonHomeWorld: React.FC<HomeWorld> = ({ homeworld }) => {
   return (
     <StyledDisplayPersonHomeWorld>
       {homeworld.map(
-        ({ name, value }) =>
+        ({ name, value }, index) =>
           name !== '__typename' && (
-            <StyledHomeWorldItem>
+            <StyledHomeWorldItem key={index}>
               <li>{capitalizingFirstLetter(name)}</li>
 
               <li>

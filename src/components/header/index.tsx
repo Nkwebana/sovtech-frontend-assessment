@@ -1,9 +1,19 @@
-import React, { FC } from 'react';
+import React from 'react';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import { StyledHeader } from './styledComponents';
 
-const Header: FC = () => {
-  return <StyledHeader>Sovtech Assessment</StyledHeader>;
+interface GoBack {
+  handleGoBack: () => void;
+}
+
+const Header: React.FC<GoBack> = ({ handleGoBack }) => {
+  return (
+    <StyledHeader>
+      <ArrowBackIcon fontSize="large" onClick={handleGoBack} />
+      Sovtech Assessment
+    </StyledHeader>
+  );
 };
 
 export default Header;
