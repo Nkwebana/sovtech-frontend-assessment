@@ -102,6 +102,7 @@ const Home: React.FC = () => {
         handleSelectedPageNumber={handleSelectedPageNumber}
         resultLength={peopleData.length}
         count={count}
+        activePageNumber={pageNumber}
       />
 
       {(loading || pageLoading) && <Loader />}

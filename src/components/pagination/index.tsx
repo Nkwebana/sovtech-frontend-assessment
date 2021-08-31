@@ -1,18 +1,24 @@
 import React, { useEffect } from 'react';
 import { useStoreActions, useStoreState, Actions } from 'easy-peasy';
 
-import { StyledPagination, StyledPageNumberWrapper } from './styledComponents';
+import {
+  StyledPagination,
+  StyledPageNumberWrapper,
+  StyledPageNumber,
+} from './styledComponents';
 import { StoreModel } from '../../store';
 
 interface CountResults {
   resultLength: number;
   count: number;
+  activePageNumber: number;
   handleSelectedPageNumber: (pageNumber: number) => void;
 }
 
 const Pagination: React.FC<CountResults> = ({
   resultLength,
   count,
+  activePageNumber,
   handleSelectedPageNumber,
 }) => {
   const setPageNumbers = useStoreActions(
@@ -50,9 +56,14 @@ const Pagination: React.FC<CountResults> = ({
     <StyledPagination>
       <StyledPageNumberWrapper>
         {pageNumbers.map((pageNumber: number, index: number) => (
-          <a key={index} onClick={() => handleSelectedPageNumber(pageNumber)}>
+          <StyledPageNumber
+            key={index}
+            onClick={() => handleSelectedPageNumber(pageNumber)}
+            activePageNumber={activePageNumber}
+            pageNumber={pageNumber}
+          >
             {pageNumber}
-          </a>
+          </StyledPageNumber>
         ))}
       </StyledPageNumberWrapper>
     </StyledPagination>
