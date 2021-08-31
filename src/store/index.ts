@@ -1,5 +1,4 @@
-import { Action, action, createStore } from 'easy-peasy';
-import { Generic, generic } from 'easy-peasy';
+import { Action, action, createStore, Generic, generic } from 'easy-peasy';
 
 interface HomeWorld {
   name: string;
@@ -23,8 +22,10 @@ export interface PeopleDetails {
 
 export interface StoreModel<PeopleDetails> {
   peopleDetails: Generic<PeopleDetails>;
+  pageNumbers: Generic<number[]>;
   count: number;
   add: Action<StoreModel<PeopleDetails>, PeopleDetails>;
+  assignNewPageNumbers: Action<StoreModel<number>, number[]>;
   addCount: Action<StoreModel<number>, number>;
 }
 
@@ -34,9 +35,13 @@ export interface PeopleStore {
 
 const storeValue: StoreModel<PeopleDetails> = {
   peopleDetails: generic([]),
+  pageNumbers: generic([]),
   count: 1,
   add: action((state, newPeople) => {
     state.peopleDetails = newPeople;
+  }),
+  assignNewPageNumbers: action((state, newPageNumbers) => {
+    state.pageNumbers = newPageNumbers;
   }),
   addCount: action((state, newCount) => {
     state.count = newCount;

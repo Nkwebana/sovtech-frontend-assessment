@@ -12,6 +12,8 @@ import { SEARCH_BY_NAME_QUERY, GET_PEOPLE_QUERY } from '../../queries';
 const Home: React.FC = () => {
   const history = useHistory();
   const [searchedName, setSearchedName] = useState('');
+  const [pageNumber, setPageNumber] = useState(1);
+  // const [pageNumbers, setPageNumbers] = useState<Array<number>>([]);
 
   const savePeople = useStoreActions(
     (actions: Actions<StoreModel<PeopleDetails>>) => actions.add
@@ -21,6 +23,9 @@ const Home: React.FC = () => {
   );
   const peopleData = useStoreState((state: PeopleStore) => state.peopleDetails);
   const count = useStoreState((state: any) => state.count);
+  const setPageNumbers = useStoreActions(
+    (actions: Actions<StoreModel<number>>) => actions.assignNewPageNumbers
+  );
 
   const handleSelectedPerson = (selectedPerson: PeopleDetails) => {
     history.push('/details', selectedPerson);
@@ -28,7 +33,7 @@ const Home: React.FC = () => {
 
   const [executeSearch, { loading, error, data }] = useLazyQuery(
     SEARCH_BY_NAME_QUERY,
-    { variables: { searchedName } }
+    { variables: { searchedName, pageNumber } }
   );
 
   const [
@@ -40,12 +45,21 @@ const Home: React.FC = () => {
 
   const handleChange = debounce((searchEvent: string) => {
     setSearchedName(searchEvent);
+    setPageNumber(1);
+
+    setPageNumbers([]);
 
     executeSearch();
   }, 400);
 
   const handleSelectedPageNumber = (pageNumber: number) => {
-    getPeoplePerPage({ variables: { page: pageNumber } });
+    setPageNumber(pageNumber);
+
+    if (searchedName.length === 0) {
+      return getPeoplePerPage({ variables: { page: pageNumber } });
+    }
+
+    executeSearch({ variables: { searchedName, pageNumber } });
   };
 
   useEffect(() => {
@@ -84,7 +98,7 @@ const Home: React.FC = () => {
         count={count}
       />
 
-      {loading || (pageLoading && <Loader />)}
+      {(loading || pageLoading) && <Loader />}
     </StyledHome>
   );
 };

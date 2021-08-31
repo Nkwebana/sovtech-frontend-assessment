@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useStoreActions, useStoreState, Actions, State } from 'easy-peasy';
 
 import { StyledPagination, StyledPageNumberWrapper } from './styledComponents';
+import { StoreModel, PeopleDetails, PeopleStore } from '../../store';
 
 interface CountResults {
   resultLength: number;
@@ -9,36 +11,49 @@ interface CountResults {
 }
 
 const Pagination: React.FC<CountResults> = ({
-  handleSelectedPageNumber,
   resultLength,
   count,
+  handleSelectedPageNumber,
 }) => {
-  const generatePaginationItemNumbers = (): Array<number> => {
-    const pageNumbers: Array<number> = [];
+  const setPageNumbers = useStoreActions(
+    (actions: Actions<StoreModel<number>>) => actions.assignNewPageNumbers
+  );
+  const pageNumbers = useStoreState((state: any) => state.pageNumbers);
+
+  const generatePaginationItemNumbers = () => {
+    const generatedPageNumbers: Array<number> = [];
 
     let totalPageNumber = count / resultLength;
 
+    /*
+    Checking if the number of pages has decimal values, and then
+    if there are then adding one more page to accomodate the decimal.
+    */
     if (totalPageNumber % 1 != 0) {
       totalPageNumber = parseInt(totalPageNumber.toFixed()) + 1;
     }
 
-    for (let i = 1; i <= totalPageNumber; i++) {
-      pageNumbers.push(i);
+    for (let page = 1; page <= totalPageNumber; page++) {
+      generatedPageNumbers.push(page);
     }
 
-    return pageNumbers || [];
+    if (pageNumbers.length === 0) {
+      setPageNumbers(generatedPageNumbers);
+    }
   };
+
+  useEffect(() => {
+    generatePaginationItemNumbers();
+  }, [count, resultLength]);
 
   return (
     <StyledPagination>
       <StyledPageNumberWrapper>
-        {generatePaginationItemNumbers().map(
-          (pageNumber: number, index: number) => (
-            <a key={index} onClick={() => handleSelectedPageNumber(pageNumber)}>
-              {pageNumber}
-            </a>
-          )
-        )}
+        {pageNumbers.map((pageNumber: number, index: number) => (
+          <a key={index} onClick={() => handleSelectedPageNumber(pageNumber)}>
+            {pageNumber}
+          </a>
+        ))}
       </StyledPageNumberWrapper>
     </StyledPagination>
   );
