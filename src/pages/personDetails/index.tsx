@@ -8,8 +8,8 @@ import { convertObjectIntoArray } from '../../utils/helpers';
 import { StoreModel } from '../../store';
 
 const PersonDetails: React.FC = () => {
-  const setActivePage = useStoreActions(
-    (actions: Actions<StoreModel<string>>) => actions.setActivePage
+  const setActivePageName = useStoreActions(
+    (actions: Actions<StoreModel<string>>) => actions.setActivePageName
   );
 
   const location = useLocation();
@@ -20,7 +20,7 @@ const PersonDetails: React.FC = () => {
   const personHomeWorld = convertObjectIntoArray(homeworld);
 
   useEffect(() => {
-    setActivePage('details');
+    setActivePageName('details');
   });
 
   return (

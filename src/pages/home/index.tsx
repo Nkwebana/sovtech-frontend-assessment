@@ -12,7 +12,6 @@ import { SEARCH_BY_NAME_QUERY, GET_PEOPLE_QUERY } from '../../queries';
 const Home: React.FC = () => {
   const history = useHistory();
   const [searchedName, setSearchedName] = useState('');
-  const [pageNumber, setPageNumber] = useState(1);
 
   const savePeople = useStoreActions(
     (actions: Actions<StoreModel<PeopleDetails>>) => actions.add
@@ -22,11 +21,15 @@ const Home: React.FC = () => {
   );
   const peopleData = useStoreState((state: PeopleStore) => state.peopleDetails);
   const count = useStoreState((state: any) => state.count);
+  const pageNumber = useStoreState((state: any) => state.activePageNumber);
   const setPageNumbers = useStoreActions(
     (actions: Actions<StoreModel<number>>) => actions.setNewPageNumbers
   );
-  const setActivePage = useStoreActions(
-    (actions: Actions<StoreModel<string>>) => actions.setActivePage
+  const setActivePageName = useStoreActions(
+    (actions: Actions<StoreModel<string>>) => actions.setActivePageName
+  );
+  const setActivePageNumber = useStoreActions(
+    (actions: Actions<StoreModel<number>>) => actions.setActivePageNumber
   );
 
   const handleSelectedPerson = (selectedPerson: PeopleDetails) => {
@@ -47,7 +50,7 @@ const Home: React.FC = () => {
 
   const handleChange = debounce((searchEvent: string) => {
     setSearchedName(searchEvent);
-    setPageNumber(1);
+    setActivePageNumber(1);
 
     setPageNumbers([]);
 
@@ -55,7 +58,7 @@ const Home: React.FC = () => {
   }, 400);
 
   const handleSelectedPageNumber = (pageNumber: number) => {
-    setPageNumber(pageNumber);
+    setActivePageNumber(pageNumber);
 
     if (searchedName.length === 0) {
       return getPeoplePerPage({ variables: { page: pageNumber } });
@@ -79,7 +82,7 @@ const Home: React.FC = () => {
   }, [pageData]);
 
   useEffect(() => {
-    setActivePage('home');
+    setActivePageName('home');
   });
 
   return (
