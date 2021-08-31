@@ -55,6 +55,7 @@ const Pagination: React.FC<CountResults> = ({
   return (
     <StyledPagination>
       <StyledPageNumberWrapper>
+        Pages:
         {pageNumbers.map((pageNumber: number, index: number) => (
           <StyledPageNumber
             key={index}

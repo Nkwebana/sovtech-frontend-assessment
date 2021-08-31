@@ -11,11 +11,14 @@ const StyledPagination = styled.div`
 
 const StyledPageNumberWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const StyledPageNumber = styled.a`
   padding: 5px;
+  margin: 5px;
   ${({ activePageNumber, pageNumber }: PageNumbers) =>
     activePageNumber === pageNumber &&
     `background-color: green; 

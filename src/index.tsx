@@ -7,11 +7,13 @@ import {
 } from '@apollo/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { StoreProvider } from 'easy-peasy';
+import { ThemeProvider } from 'styled-components';
 
 import { cache } from './cache';
 import App from './App';
 import GlobalStyles from './global-styles';
 import { store } from './store';
+import { theme } from './utils/themes';
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,
@@ -21,12 +23,14 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider store={store}>
-      <ApolloProvider client={client}>
-        <Router>
-          <GlobalStyles />
-          <App />
-        </Router>
-      </ApolloProvider>
+      <ThemeProvider theme={theme}>
+        <ApolloProvider client={client}>
+          <Router>
+            <GlobalStyles />
+            <App />
+          </Router>
+        </ApolloProvider>
+      </ThemeProvider>
     </StoreProvider>
   </React.StrictMode>,
   document.getElementById('root')

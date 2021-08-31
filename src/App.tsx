@@ -5,7 +5,7 @@ import { useLazyQuery } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 
 import { GET_PEOPLE_QUERY } from '../src/queries';
-import { Head, Loader } from './components';
+import { Head, Loader, AppWrapper } from './components';
 import { Home, PersonDetails } from './pages';
 import { StoreModel, PeopleDetails } from '../src/store';
 
@@ -43,11 +43,12 @@ const App: React.FC = () => {
   return (
     <>
       <Head handleGoBack={handleGoBack} />
-
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/details" component={PersonDetails} />
-      </Switch>
+      <AppWrapper>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/details" component={PersonDetails} />
+        </Switch>
+      </AppWrapper>
 
       {loading && <Loader />}
     </>
