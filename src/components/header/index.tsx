@@ -1,5 +1,6 @@
 import React from 'react';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { useStoreState, State } from 'easy-peasy';
 
 import { StyledHeader } from './styledComponents';
 
@@ -8,9 +9,13 @@ interface GoBack {
 }
 
 const Header: React.FC<GoBack> = ({ handleGoBack }) => {
+  const activePage = useStoreState((state: any) => state.activePage);
+
   return (
     <StyledHeader>
-      <ArrowBackIcon fontSize="large" onClick={handleGoBack} />
+      {activePage === 'details' && (
+        <ArrowBackIcon fontSize="large" onClick={handleGoBack} />
+      )}
       Sovtech Assessment
     </StyledHeader>
   );

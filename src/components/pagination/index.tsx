@@ -16,7 +16,7 @@ const Pagination: React.FC<CountResults> = ({
   handleSelectedPageNumber,
 }) => {
   const setPageNumbers = useStoreActions(
-    (actions: Actions<StoreModel<number>>) => actions.assignNewPageNumbers
+    (actions: Actions<StoreModel<number>>) => actions.setNewPageNumbers
   );
   const pageNumbers = useStoreState((state: any) => state.pageNumbers);
 

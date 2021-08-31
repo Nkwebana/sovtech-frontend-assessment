@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useStoreActions, Actions } from 'easy-peasy';
 
 import { StyledPersonDetails, StyledPersonInfo } from './styledComponents';
 import { DisplayPersonHomeWorld } from '../../components';
 import { convertObjectIntoArray } from '../../utils/helpers';
+import { StoreModel } from '../../store';
 
 const PersonDetails: React.FC = () => {
+  const setActivePage = useStoreActions(
+    (actions: Actions<StoreModel<string>>) => actions.setActivePage
+  );
+
   const location = useLocation();
   const selectedPerson = location && location.state ? location.state : {};
   const { name, height, mass, homeworld } = selectedPerson;
@@ -13,10 +19,14 @@ const PersonDetails: React.FC = () => {
   //Converting an object into an array
   const personHomeWorld = convertObjectIntoArray(homeworld);
 
+  useEffect(() => {
+    setActivePage('details');
+  });
+
   return (
     <StyledPersonDetails>
       <h1>
-        Here are <strong>{name}</strong>'s details:{' '}
+        Here are <strong>{name}</strong>'s details:
       </h1>
 
       <StyledPersonInfo>

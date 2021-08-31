@@ -24,9 +24,11 @@ export interface StoreModel<PeopleDetails> {
   peopleDetails: Generic<PeopleDetails>;
   pageNumbers: Generic<number[]>;
   count: number;
+  activePage: string;
   add: Action<StoreModel<PeopleDetails>, PeopleDetails>;
-  assignNewPageNumbers: Action<StoreModel<number>, number[]>;
+  setNewPageNumbers: Action<StoreModel<number>, number[]>;
   addCount: Action<StoreModel<number>, number>;
+  setActivePage: Action<StoreModel<string>, string>;
 }
 
 export interface PeopleStore {
@@ -37,14 +39,18 @@ const storeValue: StoreModel<PeopleDetails> = {
   peopleDetails: generic([]),
   pageNumbers: generic([]),
   count: 1,
+  activePage: '',
   add: action((state, newPeople) => {
     state.peopleDetails = newPeople;
   }),
-  assignNewPageNumbers: action((state, newPageNumbers) => {
+  setNewPageNumbers: action((state, newPageNumbers) => {
     state.pageNumbers = newPageNumbers;
   }),
   addCount: action((state, newCount) => {
     state.count = newCount;
+  }),
+  setActivePage: action((state, newActivePage) => {
+    state.activePage = newActivePage;
   }),
 };
 

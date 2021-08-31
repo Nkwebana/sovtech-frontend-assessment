@@ -23,7 +23,10 @@ const Home: React.FC = () => {
   const peopleData = useStoreState((state: PeopleStore) => state.peopleDetails);
   const count = useStoreState((state: any) => state.count);
   const setPageNumbers = useStoreActions(
-    (actions: Actions<StoreModel<number>>) => actions.assignNewPageNumbers
+    (actions: Actions<StoreModel<number>>) => actions.setNewPageNumbers
+  );
+  const setActivePage = useStoreActions(
+    (actions: Actions<StoreModel<string>>) => actions.setActivePage
   );
 
   const handleSelectedPerson = (selectedPerson: PeopleDetails) => {
@@ -74,6 +77,10 @@ const Home: React.FC = () => {
       saveCount(pageData.getPeople.count);
     }
   }, [pageData]);
+
+  useEffect(() => {
+    setActivePage('home');
+  });
 
   return (
     <StyledHome>
