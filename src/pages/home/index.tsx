@@ -11,17 +11,20 @@ import { SEARCH_BY_NAME_QUERY, GET_PEOPLE_QUERY } from '../../queries';
 
 const Home: React.FC = () => {
   const history = useHistory();
-  const [searchedName, setSearchedName] = useState('');
 
+  //useStoreState
+  const peopleData = useStoreState((state: PeopleStore) => state.peopleDetails);
+  const count = useStoreState((state: any) => state.count);
+  const pageNumber = useStoreState((state: any) => state.activePageNumber);
+  const searchedName = useStoreState((state: any) => state.searchedName);
+
+  //useStoreActions
   const savePeople = useStoreActions(
     (actions: Actions<StoreModel<PeopleDetails>>) => actions.add
   );
   const saveCount = useStoreActions(
     (actions: Actions<StoreModel<number>>) => actions.addCount
   );
-  const peopleData = useStoreState((state: PeopleStore) => state.peopleDetails);
-  const count = useStoreState((state: any) => state.count);
-  const pageNumber = useStoreState((state: any) => state.activePageNumber);
   const setPageNumbers = useStoreActions(
     (actions: Actions<StoreModel<number>>) => actions.setNewPageNumbers
   );
@@ -30,6 +33,9 @@ const Home: React.FC = () => {
   );
   const setActivePageNumber = useStoreActions(
     (actions: Actions<StoreModel<number>>) => actions.setActivePageNumber
+  );
+  const setSearchedName = useStoreActions(
+    (actions: Actions<StoreModel<string>>) => actions.setSearchedName
   );
 
   const handleSelectedPerson = (selectedPerson: PeopleDetails) => {

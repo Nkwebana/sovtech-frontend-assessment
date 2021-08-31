@@ -16,6 +16,7 @@ const Header: React.FC<GoBack> = ({ handleGoBack }) => {
       {activePage === 'details' && (
         <ArrowBackIcon fontSize="large" onClick={handleGoBack} />
       )}
+
       <div>
         <h1>Sovtech Assessment</h1>
       </div>

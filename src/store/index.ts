@@ -26,11 +26,13 @@ export interface StoreModel<PeopleDetails> {
   count: number;
   activePageNumber: number;
   activePage: string;
+  searchedName: string;
   add: Action<StoreModel<PeopleDetails>, PeopleDetails>;
   setNewPageNumbers: Action<StoreModel<number>, number[]>;
   addCount: Action<StoreModel<number>, number>;
   setActivePageNumber: Action<StoreModel<number>, number>;
   setActivePageName: Action<StoreModel<string>, string>;
+  setSearchedName: Action<StoreModel<string>, string>;
 }
 
 export interface PeopleStore {
@@ -43,6 +45,7 @@ const storeValue: StoreModel<PeopleDetails> = {
   count: 1,
   activePageNumber: 1,
   activePage: '',
+  searchedName: '',
   add: action((state, newPeople) => {
     state.peopleDetails = newPeople;
   }),
@@ -57,6 +60,9 @@ const storeValue: StoreModel<PeopleDetails> = {
   }),
   setActivePageName: action((state, newActivePage) => {
     state.activePage = newActivePage;
+  }),
+  setSearchedName: action((state, newSearchName) => {
+    state.searchedName = newSearchName;
   }),
 };
 
