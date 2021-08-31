@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface PropTypes {
+interface PageNumbers {
   activePageNumber: number;
   pageNumber: number;
 }
@@ -16,7 +16,7 @@ const StyledPageNumberWrapper = styled.div`
 
 const StyledPageNumber = styled.a`
   padding: 5px;
-  ${({ activePageNumber, pageNumber }: PropTypes) =>
+  ${({ activePageNumber, pageNumber }: PageNumbers) =>
     activePageNumber === pageNumber &&
     `background-color: green; 
     border-radius: 50%;
