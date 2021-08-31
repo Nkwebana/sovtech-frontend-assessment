@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useStoreActions, useStoreState, Actions, State } from 'easy-peasy';
+import { useStoreActions, useStoreState, Actions } from 'easy-peasy';
 
 import { StyledPagination, StyledPageNumberWrapper } from './styledComponents';
-import { StoreModel, PeopleDetails, PeopleStore } from '../../store';
+import { StoreModel } from '../../store';
 
 interface CountResults {
   resultLength: number;

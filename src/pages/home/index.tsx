@@ -13,7 +13,6 @@ const Home: React.FC = () => {
   const history = useHistory();
   const [searchedName, setSearchedName] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
-  // const [pageNumbers, setPageNumbers] = useState<Array<number>>([]);
 
   const savePeople = useStoreActions(
     (actions: Actions<StoreModel<PeopleDetails>>) => actions.add
