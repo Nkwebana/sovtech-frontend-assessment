@@ -5,4 +5,4 @@ I used Easy Peasy - Easy Peasy is an abstraction of Redux, providing a reimagine
 
 DEPLOYMENT:
 
-This frontend application is deployed to Firebase :https://sovtech-frontend-assessment.firebaseapp.com/ . For more: https://firebase.google.com/
+This frontend application is deployed to Firebase: https://sovtech-frontend-assessment.firebaseapp.com/ . For more: https://firebase.google.com/
