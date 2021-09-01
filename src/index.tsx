@@ -14,10 +14,11 @@ import App from './App';
 import GlobalStyles from './global-styles';
 import { store } from './store';
 import { theme } from './utils/themes';
+import { APOLLO_SERVER_API_URL } from './constants';
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,
-  uri: 'http://localhost:8080/',
+  uri: APOLLO_SERVER_API_URL,
 });
 
 ReactDOM.render(

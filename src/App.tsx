@@ -48,9 +48,9 @@ const App: React.FC = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/details" component={PersonDetails} />
         </Switch>
-      </AppWrapper>
 
-      {loading && <Loader />}
+        {loading && <Loader />}
+      </AppWrapper>
     </>
   );
 };

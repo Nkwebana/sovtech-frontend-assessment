@@ -61,7 +61,7 @@ const Home: React.FC = () => {
     setPageNumbers([]);
 
     executeSearch();
-  }, 400);
+  }, 100);
 
   const handleSelectedPageNumber = (pageNumber: number) => {
     setActivePageNumber(pageNumber);
