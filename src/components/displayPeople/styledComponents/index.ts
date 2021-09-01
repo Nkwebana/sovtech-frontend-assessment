@@ -6,7 +6,7 @@ const StyledPeople = styled.div`
 
 const StyledPerson = styled.div`
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 15px;
   background-color: lightsteelblue;
   color: white;
   font-size: 20px;
