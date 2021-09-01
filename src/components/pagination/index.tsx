@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useStoreActions, useStoreState, Actions } from 'easy-peasy';
+import { useStoreActions, useStoreState, Actions, State } from 'easy-peasy';
 
 import {
   StyledPagination,
@@ -24,7 +24,9 @@ const Pagination: React.FC<CountResults> = ({
   const setPageNumbers = useStoreActions(
     (actions: Actions<StoreModel<number>>) => actions.setNewPageNumbers
   );
-  const pageNumbers = useStoreState((state: any) => state.pageNumbers);
+  const pageNumbers = useStoreState(
+    (state: State<StoreModel<number>>) => state.pageNumbers
+  );
 
   const generatePaginationItemNumbers = () => {
     const generatedPageNumbers: Array<number> = [];
@@ -35,7 +37,7 @@ const Pagination: React.FC<CountResults> = ({
     Checking if the number of pages has decimal values, and then
     if there are then adding one more page to accomodate the decimal.
     */
-    if (totalPageNumber % 1 != 0) {
+    if (totalPageNumber % 1 !== 0) {
       totalPageNumber = parseInt(totalPageNumber.toFixed()) + 1;
     }
 

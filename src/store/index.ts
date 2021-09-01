@@ -39,7 +39,7 @@ export interface PeopleStore {
   peopleDetails: PeopleDetails[];
 }
 
-const storeValue: StoreModel<PeopleDetails> = {
+const mainStore: StoreModel<PeopleDetails> = {
   peopleDetails: generic([]),
   pageNumbers: generic([]),
   count: 1,
@@ -66,4 +66,4 @@ const storeValue: StoreModel<PeopleDetails> = {
   }),
 };
 
-export const store = createStore(storeValue);
+export const store = createStore(mainStore);

@@ -3,13 +3,16 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useStoreState, State } from 'easy-peasy';
 
 import { StyledHeader } from './styledComponents';
+import { StoreModel } from '../../store';
 
 interface GoBack {
   handleGoBack: () => void;
 }
 
 const Header: React.FC<GoBack> = ({ handleGoBack }) => {
-  const activePage = useStoreState((state: any) => state.activePage);
+  const activePage = useStoreState(
+    (state: State<StoreModel<number>>) => state.activePage
+  );
 
   return (
     <StyledHeader>

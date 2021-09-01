@@ -9,6 +9,7 @@ const StyledPerson = styled.div`
   padding: 10px;
   background-color: lightsteelblue;
   color: white;
+  font-size: 20px;
 `;
 
 export { StyledPerson, StyledPeople };

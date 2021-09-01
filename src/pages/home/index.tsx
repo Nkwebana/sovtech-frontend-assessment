@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useStoreActions, useStoreState, Actions } from 'easy-peasy';
+import React, { useEffect } from 'react';
+import { useStoreActions, useStoreState, Actions, State } from 'easy-peasy';
 import { useHistory } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
 import { debounce } from 'ts-debounce';
@@ -14,9 +14,15 @@ const Home: React.FC = () => {
 
   //useStoreState
   const peopleData = useStoreState((state: PeopleStore) => state.peopleDetails);
-  const count = useStoreState((state: any) => state.count);
-  const pageNumber = useStoreState((state: any) => state.activePageNumber);
-  const searchedName = useStoreState((state: any) => state.searchedName);
+  const count = useStoreState(
+    (state: State<StoreModel<number>>) => state.count
+  );
+  const pageNumber = useStoreState(
+    (state: State<StoreModel<number>>) => state.activePageNumber
+  );
+  const searchedName = useStoreState(
+    (state: State<StoreModel<string>>) => state.searchedName
+  );
 
   //useStoreActions
   const savePeople = useStoreActions(
